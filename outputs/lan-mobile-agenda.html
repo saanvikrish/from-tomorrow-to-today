@@ -1,0 +1,1678 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LAN Program Agenda</title>
+  <style>
+    :root {
+      --orange: #f15422;
+      --coral: #f37855;
+      --red: #c70f36;
+      --blue: #003e6b;
+      --ink: #111114;
+      --paper: #fbfcff;
+      --paper-warm: #fbfaf7;
+      --muted: #5f6672;
+      --line: #e7ebf2;
+      --shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+      --deep-shadow: 0 18px 0 rgba(0, 62, 107, 0.08), 0 24px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, var(--orange) 0 10px, transparent 10px calc(100% - 10px), var(--orange) calc(100% - 10px)),
+        radial-gradient(circle at 18px 18px, rgba(0, 62, 107, 0.045) 1px, transparent 1.4px) 0 0 / 28px 28px,
+        var(--paper-warm);
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .shell {
+      width: min(100%, 520px);
+      margin: 0 auto;
+      padding: 12px 18px 46px;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 -6px 10px;
+      padding: 8px 6px;
+      background: rgba(251, 250, 247, 0.9);
+      backdrop-filter: blur(12px);
+    }
+
+    .mini-brand {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .menu-button {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0, 62, 107, 0.18);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+    }
+
+    .menu-button span {
+      width: 20px;
+      height: 2px;
+      margin: 2px 0;
+      border-radius: 99px;
+      background: var(--blue);
+    }
+
+    .menu-panel {
+      position: fixed;
+      top: 58px;
+      right: max(18px, calc((100vw - 520px) / 2 + 18px));
+      z-index: 30;
+      display: none;
+      min-width: 210px;
+      padding: 8px;
+      border: 1px solid rgba(0, 62, 107, 0.14);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+    }
+
+    .menu-panel.is-open {
+      display: grid;
+      gap: 4px;
+    }
+
+    .menu-panel a {
+      padding: 12px;
+      border-radius: 7px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .menu-panel a:hover,
+    .menu-panel a:focus-visible {
+      background: rgba(0, 62, 107, 0.08);
+      outline: 0;
+    }
+
+    .binder-strip {
+      position: relative;
+      height: 54px;
+      margin: 0 0 14px;
+      border: 1px solid rgba(0, 62, 107, 0.12);
+      border-radius: 8px;
+      background:
+        linear-gradient(0deg, rgba(199, 15, 54, 0.08) 1px, transparent 1px) 0 18px / 100% 18px,
+        #fffdf8;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .binder-strip::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 20px;
+      width: 2px;
+      background: rgba(199, 15, 54, 0.18);
+    }
+
+    .binder-strip::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--paper-warm);
+      box-shadow:
+        0 16px 0 var(--paper-warm),
+        0 32px 0 var(--paper-warm),
+        inset 0 0 0 1px rgba(0, 62, 107, 0.16),
+        0 16px 0 0 var(--paper-warm),
+        0 32px 0 0 var(--paper-warm);
+    }
+
+    .hero {
+      position: relative;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px 0 18px;
+    }
+
+    .logo-lockup {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .lan-logo {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+    }
+
+    .partner-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .partner-logo {
+      width: 100%;
+      max-height: 46px;
+      object-fit: contain;
+      object-position: left center;
+      border-radius: 4px;
+      background: white;
+    }
+
+    .clac-logo {
+      width: 88%;
+      max-height: 38px;
+    }
+
+    .title-wrap {
+      margin: 38px 0 36px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 16px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--red);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 420px;
+      font-size: clamp(48px, 15vw, 76px);
+      line-height: 0.92;
+      letter-spacing: 0;
+      font-weight: 850;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .event-name {
+      margin: 20px 0 0;
+      color: var(--blue);
+      font-size: clamp(21px, 6vw, 30px);
+      line-height: 1.08;
+      font-weight: 800;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .hero-card {
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: white;
+      box-shadow: var(--deep-shadow);
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .meta {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .meta span {
+      display: block;
+      color: var(--coral);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .meta strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 16px;
+      line-height: 1.1;
+      font-weight: 760;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: var(--red);
+      opacity: 0.35;
+    }
+
+    .section {
+      margin: 28px 0 0;
+    }
+
+    .village-section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      margin: 0 -18px 18px;
+      padding: 14px 18px;
+      background: rgba(255, 250, 241, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-head p {
+      margin: 0 0 3px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 26px;
+      line-height: 1.08;
+      font-weight: 820;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .village {
+      display: block;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--orange);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 8px 8px 0 rgba(0, 62, 107, 0.06), 0 12px 26px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .village:active {
+      transform: translateY(1px);
+    }
+
+    .village h2 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 24px;
+      line-height: 1.08;
+      font-weight: 820;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .village p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.42;
+    }
+
+    .village-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: rgba(0, 62, 107, 0.08);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .agenda {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding-left: 20px;
+    }
+
+    .agenda::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 8px;
+      bottom: 20px;
+      width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(var(--red), var(--orange), var(--blue));
+    }
+
+    .card {
+      position: relative;
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .agenda-card {
+      padding: 16px 16px 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 6px 6px 0 rgba(241, 84, 34, 0.08), 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .agenda-card::before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      border: 3px solid var(--paper);
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 3px rgba(199, 15, 54, 0.15);
+    }
+
+    .time {
+      display: inline-flex;
+      margin-bottom: 10px;
+      padding: 7px 10px;
+      border-radius: 7px;
+      background: rgba(241, 84, 34, 0.11);
+      color: var(--red);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .agenda-card h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.08;
+      font-weight: 820;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .agenda-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 620;
+      line-height: 1.36;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(0, 62, 107, 0.08);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 780;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .status-note {
+      margin: 14px 0;
+      padding: 12px;
+      border: 1px solid rgba(199, 15, 54, 0.18);
+      border-radius: 8px;
+      background: rgba(199, 15, 54, 0.06);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.35;
+    }
+
+    .room-map,
+    .session-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .room-card,
+    .session-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 5px 5px 0 rgba(0, 62, 107, 0.06), 0 10px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .room-card strong,
+    .session-card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .room-card span,
+    .session-card span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 640;
+      line-height: 1.3;
+    }
+
+    .session-card p {
+      margin: 8px 0 0;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 620;
+      line-height: 1.36;
+    }
+
+    .section-label {
+      margin: 22px 0 8px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .speaker-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 20px 1fr;
+      gap: 18px 8px;
+      align-items: center;
+      margin: 6px 0 0;
+    }
+
+    .speaker-timeline::before {
+      content: "";
+      position: absolute;
+      left: calc(50% - 2px);
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(var(--red), var(--orange), var(--blue));
+    }
+
+    .speaker-node {
+      position: relative;
+      z-index: 2;
+      grid-column: 2;
+      width: 18px;
+      height: 18px;
+      border: 3px solid var(--paper);
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 4px rgba(199, 15, 54, 0.13);
+    }
+
+    .speaker-card {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      width: 100%;
+      min-width: 0;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 5px 5px 0 rgba(0, 62, 107, 0.06), 0 10px 24px rgba(0, 0, 0, 0.07);
+      color: inherit;
+      font: inherit;
+      text-align: inherit;
+      cursor: pointer;
+    }
+
+    .speaker-card > div:last-child {
+      min-width: 0;
+      padding: 12px 4px 5px;
+      background: white;
+    }
+
+    .speaker-card.left {
+      grid-column: 1;
+      text-align: right;
+    }
+
+    .speaker-card.right {
+      grid-column: 3;
+      text-align: left;
+    }
+
+    .speaker-card:hover,
+    .speaker-card:focus-visible {
+      border-color: rgba(0, 62, 107, 0.38);
+      outline: 0;
+      transform: translateY(-1px);
+    }
+
+    .more-cue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: inherit;
+      margin-top: 8px;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .headshot {
+      position: relative;
+      aspect-ratio: 1;
+      width: 100%;
+      min-height: 0;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(0, 62, 107, 0.14), rgba(241, 84, 34, 0.18)),
+        white;
+      border: 1px solid rgba(0, 62, 107, 0.2);
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 820;
+      text-transform: uppercase;
+    }
+
+    .headshot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .speaker-card h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(14px, 3.6vw, 17px);
+      line-height: 1.16;
+      font-weight: 780;
+      text-transform: none;
+      overflow-wrap: anywhere;
+    }
+
+    .speaker-card p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 620;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .expert-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .expert-card {
+      min-height: 148px;
+      padding: 13px;
+      border: 1px solid rgba(0, 62, 107, 0.16);
+      border-radius: 8px;
+      background: #fffdf8;
+      box-shadow: 5px 5px 0 rgba(199, 15, 54, 0.06), 0 10px 24px rgba(0, 0, 0, 0.07);
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .expert-card:hover,
+    .expert-card:focus-visible {
+      border-color: rgba(199, 15, 54, 0.35);
+      outline: 0;
+    }
+
+    .expert-card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 15px;
+      font-weight: 780;
+      line-height: 1.12;
+      text-transform: none;
+    }
+
+    .expert-card span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 620;
+      line-height: 1.25;
+    }
+
+    .table-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .table-tile {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 5px 5px 0 rgba(0, 62, 107, 0.06), 0 10px 24px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+    }
+
+    .table-icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: white;
+      font-size: 15px;
+      font-weight: 780;
+    }
+
+    .table-tile h3 {
+      margin: 10px 0 0;
+      color: var(--ink);
+      font-size: clamp(13px, 3.5vw, 16px);
+      line-height: 1.1;
+      font-weight: 780;
+      text-transform: none;
+    }
+
+    .table-tile p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: clamp(11px, 3vw, 13px);
+      font-weight: 620;
+      line-height: 1.18;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .people {
+      display: grid;
+      gap: 12px;
+    }
+
+    .person {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .initials {
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .person h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.08;
+      font-weight: 780;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .person p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 620;
+      line-height: 1.28;
+    }
+
+    .resource-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    #schedule,
+    #sessions,
+    #speakers,
+    #community-tables,
+    #quick-help {
+      scroll-margin-top: 84px;
+    }
+
+    .resource {
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: white;
+    }
+
+    .resource strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--coral);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .resource span {
+      display: block;
+      font-size: 16px;
+      font-weight: 760;
+      line-height: 1.25;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: end center;
+      padding: 18px;
+      background: rgba(17, 17, 20, 0.52);
+    }
+
+    .modal.is-open {
+      display: grid;
+    }
+
+    .modal-panel {
+      width: min(100%, 480px);
+      max-height: min(78vh, 680px);
+      overflow: auto;
+      padding: 18px;
+      border: 1px solid rgba(0, 62, 107, 0.18);
+      border-radius: 8px;
+      background:
+        linear-gradient(0deg, rgba(199, 15, 54, 0.08) 1px, transparent 1px) 0 25px / 100% 32px,
+        var(--paper-warm);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .modal-kicker {
+      margin: 0 0 5px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .modal h2 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 28px;
+      line-height: 1.04;
+      font-weight: 820;
+      text-transform: none;
+      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    }
+
+    .modal-close {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(0, 62, 107, 0.2);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      font-size: 22px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 620;
+      line-height: 1.45;
+    }
+
+    .modal-body p {
+      margin: 0 0 12px;
+    }
+
+    .modal-body strong {
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="top-nav" aria-label="Agenda navigation">
+      <span class="mini-brand">LAN Agenda</span>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <div class="menu-panel" id="main-menu">
+      <a href="#schedule">Schedule</a>
+      <a href="#sessions">Sessions</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#community-tables">Community Tables</a>
+      <a href="#quick-help">Quick Help</a>
+    </div>
+
+    <section class="hero">
+      <div class="binder-strip" aria-hidden="true"></div>
+
+      <div class="logo-lockup" aria-label="Latino Action Network, Rutgers CLAC, and LISTA">
+        <img class="lan-logo" src="lan-logo.png" alt="Latino Action Network logo">
+        <div class="partner-stack">
+          <img class="partner-logo clac-logo" src="clac-logo.png" alt="Rutgers Center for Latino Arts and Culture logo">
+          <img class="partner-logo" src="lista-logo.png" alt="Rutgers School of Social Work LISTA logo">
+        </div>
+      </div>
+
+      <div class="title-wrap">
+        <p class="eyebrow">Mobile Agenda</p>
+        <h1>Program<br>Agenda</h1>
+        <p class="event-name">From Tomorrow to Today</p>
+      </div>
+
+      <div>
+        <div class="hero-card card">
+          <p>Owning your power as a leader through representation, advocacy, policy, wellness, media, financial literacy, and the arts.</p>
+          <div class="meta-row">
+            <div class="meta">
+              <span>Date</span>
+              <strong>Sept. 26, 2026</strong>
+            </div>
+            <div class="meta">
+              <span>Time</span>
+              <strong>9 AM - 3 PM</strong>
+            </div>
+            <div class="meta">
+              <span>Campus</span>
+              <strong>Rutgers NB</strong>
+            </div>
+            <div class="meta">
+              <span>Status</span>
+              <strong>Open to All</strong>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-cue">Scroll for schedule</div>
+      </div>
+
+    </section>
+
+    <section class="section village-section">
+      <a class="village card" href="#community-tables" aria-label="Jump to Resource Community Village tables">
+        <h2>Resource Community Village</h2>
+        <p>Meet community partners, ask questions, and connect with organizations offering services, advocacy, wellness support, civic resources, and family-centered guidance.</p>
+        <span class="village-cta">Click here to see more</span>
+      </a>
+    </section>
+
+    <section class="section" id="schedule" aria-label="Program agenda">
+      <div class="section-head">
+        <p>September 26</p>
+        <h2>Agenda Overview</h2>
+      </div>
+
+      <div class="status-note card">
+        Needs confirmation: the agenda overview lists First Breakout Sessions as 11:00 AM - 12:00 PM, while the room grid in the working agenda also references a 10:30 AM - 12:00 PM morning block.
+      </div>
+
+      <div class="agenda">
+        <article class="agenda-card card">
+          <span class="time">9:00 - 9:30 AM</span>
+          <h3>Registration</h3>
+          <p>Check in, grab materials, and visit the Resource Community Village.</p>
+        </article>
+
+        <article class="agenda-card card">
+          <span class="time">9:30 - 10:30 AM</span>
+          <h3>Kick-Off + Panel</h3>
+          <p><strong>Mirror Your Representation</strong> opens the day with civic leadership, visibility, and public service.</p>
+          <div class="tags">
+            <span class="tag">ABE 2225 / Main Gathering Room?</span>
+            <span class="tag">Assemblywoman Bagolie</span>
+            <span class="tag">Secretary Chaly</span>
+            <span class="tag">Assemblyman Rodriguez</span>
+            <span class="tag">Morales</span>
+            <span class="tag">Collazos-Gill</span>
+            <span class="tag">Mayor Frank Velez</span>
+          </div>
+        </article>
+
+        <article class="agenda-card card">
+          <span class="time">11:00 AM - 12:00 PM</span>
+          <h3>First Breakouts</h3>
+          <p>Choose a focused session and go deeper with facilitators and community leaders.</p>
+          <div class="tags">
+            <span class="tag">Rooms vary</span>
+            <span class="tag">Mental Wellness</span>
+            <span class="tag">From Protest to Policy</span>
+            <span class="tag">Financial Literacy</span>
+          </div>
+        </article>
+
+        <article class="agenda-card card">
+          <span class="time">12:00 - 12:30 PM</span>
+          <h3>Lunch</h3>
+          <p>Break, recharge, and keep visiting the resource tables.</p>
+        </article>
+
+        <article class="agenda-card card">
+          <span class="time">12:30 - 2:00 PM</span>
+          <h3>Second Breakouts</h3>
+          <p>Continue with afternoon sessions across advocacy, rights, leadership, and storytelling.</p>
+          <div class="tags">
+            <span class="tag">Rooms vary</span>
+            <span class="tag">10 Steps to Advocacy</span>
+            <span class="tag">Know Your Rights</span>
+            <span class="tag">Afro Latino Experience</span>
+          </div>
+        </article>
+
+        <article class="agenda-card card">
+          <span class="time">2:00 - 3:00 PM</span>
+          <h3>General Session + Closing</h3>
+          <p>Return to the main room for final reflections, next steps, and closing remarks.</p>
+          <div class="tags">
+            <span class="tag">Main Gathering Room?</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="sessions" aria-label="Session details">
+      <div class="section-head">
+        <p>Session details</p>
+        <h2>Morning & Afternoon</h2>
+      </div>
+
+      <h3 class="section-label">Room Map From Working Agenda</h3>
+      <div class="room-map">
+        <article class="room-card card">
+          <strong>ABE 2225</strong>
+          <span>Legislators Panel / Main Gathering Room / Afternoon General Session Panel. Needs confirmation because multiple uses are listed.</span>
+        </article>
+        <article class="room-card card">
+          <strong>ABE 2200</strong>
+          <span>Mental Health in the morning; Voting Protection in the afternoon.</span>
+        </article>
+        <article class="room-card card">
+          <strong>ABE 2400</strong>
+          <span>Financial Literacy in the morning; 10 Steps to Advocacy in the afternoon.</span>
+        </article>
+        <article class="room-card card">
+          <strong>ABE 3200</strong>
+          <span>Immigration Session in the morning; Know Your Rights in the afternoon.</span>
+        </article>
+        <article class="room-card card">
+          <strong>ABE 4400</strong>
+          <span>10 Steps to Advocacy in the morning; From Protest to Policy in the afternoon.</span>
+        </article>
+        <article class="room-card card">
+          <strong>ABE 4225</strong>
+          <span>Afro Latino Experience. Morning/afternoon placement needs confirmation.</span>
+        </article>
+      </div>
+
+      <h3 class="section-label">Morning Sessions</h3>
+      <div class="session-list">
+        <article class="session-card card">
+          <strong>Mental Wellness</strong>
+          <span>Room: ABE 2200 | Time: morning block needs confirmation</span>
+          <p><strong>Proposed copy:</strong> A LISTA School of Social Work session centering mental wellbeing, community care, and practical strategies for sustaining leadership.</p>
+          <div class="tags">
+            <span class="tag">Moderator: Dr. Candelario?</span>
+            <span class="tag">Panelists: Dr. Lopez & Dr. Paz?</span>
+          </div>
+        </article>
+        <article class="session-card card">
+          <strong>Financial Literacy</strong>
+          <span>Room: ABE 2400 | Time: morning block needs confirmation</span>
+          <p><strong>Proposed copy:</strong> A practical session focused on building financial confidence, everyday money skills, and tools attendees can use beyond the summit.</p>
+          <div class="tags">
+            <span class="tag">Chris Cordero?</span>
+          </div>
+        </article>
+        <article class="session-card card">
+          <strong>Immigration Session</strong>
+          <span>Room: ABE 3200 | Time: morning block needs confirmation</span>
+          <p><strong>Proposed copy:</strong> A session focused on immigrant justice, lived experience, legal context, and community resources for families and advocates.</p>
+          <div class="tags">
+            <span class="tag">Allison Garcia</span>
+            <span class="tag">Ulla D. Berg</span>
+            <span class="tag">Marisol Conde-Hernandez</span>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="section-label">Afternoon Sessions</h3>
+      <div class="session-list">
+        <article class="session-card card">
+          <strong>10 Steps to Advocacy</strong>
+          <span>Room: ABE 2400 or ABE 4400 | Needs confirmation</span>
+          <p>This session engages participants in practical steps any person or group can take to move from being concerned to becoming an effective advocate for change.</p>
+          <p>Participants will work in small groups to develop an advocacy plan for a fictional scenario involving a Latino-oriented arts organization whose state funding is being threatened.</p>
+          <div class="tags">
+            <span class="tag">David Matos, Jr.</span>
+          </div>
+        </article>
+        <article class="session-card card">
+          <strong>From Protest to Policy</strong>
+          <span>Room: ABE 4400 | Time/placement needs confirmation</span>
+          <p><strong>Proposed copy:</strong> A policy-focused session on how lived experience, advocacy, and organizing can move from public pressure into legislative and institutional change.</p>
+          <div class="tags">
+            <span class="tag">Moderator: Cuqui Rivera</span>
+            <span class="tag">Daniela Velez</span>
+            <span class="tag">Erika J. Nava</span>
+          </div>
+        </article>
+        <article class="session-card card">
+          <strong>Afro Latino Experience</strong>
+          <span>Room: ABE 4225 | Time needs confirmation</span>
+          <p><strong>Proposed copy:</strong> A conversation centering Afro Latino identity, leadership, community experience, and representation within broader Latino civic life.</p>
+        </article>
+        <article class="session-card card">
+          <strong>Know Your Rights / Voting Protection</strong>
+          <span>Rooms: ABE 3200 / ABE 2200 | Relationship between these titles needs confirmation</span>
+          <p><strong>Proposed copy:</strong> A civic education session focused on rights, voting protection, and tools for navigating public systems with confidence.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="speakers" aria-label="Panelists and facilitators">
+      <div class="section-head">
+        <p>Who you'll hear from</p>
+        <h2>Panelists & Facilitators</h2>
+      </div>
+
+      <div class="speaker-timeline">
+        <button class="speaker-card left card" type="button" data-person="javier-robles">
+          <div class="headshot"><img src="javier-robles.png" alt="Javier Robles headshot"></div>
+          <div>
+            <h3>Javier Robles</h3>
+            <p>LAN President and advocate for Latino/a/x, disability rights, and public service.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card right card" type="button" data-person="quijano">
+          <div class="headshot"><img src="annette-quijano.jpg" alt="Assemblywoman Annette Quijano headshot"></div>
+          <div>
+            <h3>Annette Quijano</h3>
+            <p>Assemblywoman and Speaker Pro Tempore representing New Jersey's 20th District.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card left card" type="button" data-person="morales">
+          <div class="headshot"><img src="carmen-morales.jpg" alt="Assemblywoman Carmen Theresa Morales headshot"></div>
+          <div>
+            <h3>Carmen Theresa Morales</h3>
+            <p>Assemblywoman for Legislative District 34 and education advocate.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card right card" type="button" data-person="rodriguez">
+          <div class="headshot"><img src="gabriel-rodriguez.jpg" alt="Assemblyman Gabriel Rodriguez headshot"></div>
+          <div>
+            <h3>Gabriel Rodriguez</h3>
+            <p>Assemblyman for Legislative District 33 with deep local and state policy experience.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card left card" type="button" data-person="collazos">
+          <div class="headshot"><img src="alixon-collazos-gill.jpg" alt="Assemblywoman Alixon Collazos-Gill headshot"></div>
+          <div>
+            <h3>Alixon Collazos-Gill</h3>
+            <p>Assemblywoman for New Jersey's 27th District and first Colombian immigrant in the Assembly.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card right card" type="button" data-person="patricia-campos-medina">
+          <div class="headshot"><img src="patricia-campos-medina.jpg" alt="Dr. Patricia Campos-Medina headshot"></div>
+          <div>
+            <h3>Patricia Campos-Medina</h3>
+            <p>Political scientist, labor leader, educator, activist, and Latina civic leader.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card left card" type="button" data-person="david-matos">
+          <div class="headshot"><img src="david-matos.jpg" alt="David Matos Jr. headshot"></div>
+          <div>
+            <h3>David Matos, Jr.</h3>
+            <p>Public affairs strategist and longtime public servant in New Jersey government.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card right card" type="button" data-person="tiana-pimentel">
+          <div class="headshot"><img src="tiana-pimentel.jpg" alt="Tiana Pimentel headshot"></div>
+          <div>
+            <h3>Tiana Pimentel</h3>
+            <p>Dominican-American sculptor and printmaker exploring Caribbean diaspora and ancestral connection.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card left card" type="button" data-person="erika-nava">
+          <div class="headshot"><img src="erika-nava.png" alt="Erika Nava headshot"></div>
+          <div>
+            <h3>Erika J. Nava</h3>
+            <p>Executive Director of the New Jersey Latino Caucus Foundation and policy leader.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card right card" type="button" data-person="allison-garcia">
+          <div class="headshot"><img src="allison-garcia.jpg" alt="Allison Garcia headshot"></div>
+          <div>
+            <h3>Allison Garcia</h3>
+            <p>Youth activist and first-generation Latina organizer for immigrant justice.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card left card" type="button" data-person="ulla-berg">
+          <div class="headshot"><img src="ulla-berg.jpg" alt="Ulla D. Berg headshot"></div>
+          <div>
+            <h3>Ulla D. Berg</h3>
+            <p>Rutgers professor focused on migration, borders, carceral regimes, and U.S. Latinx communities.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card right card" type="button" data-person="marisol-conde">
+          <div class="headshot"><img src="marisol-conde-hernandez.jpg" alt="Marisol Conde-Hernandez headshot"></div>
+          <div>
+            <h3>Marisol Conde-Hernandez</h3>
+            <p>Managing attorney and immigration law leader in New Jersey.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+        <button class="speaker-card left card" type="button" data-person="nuzhat-chowdhury">
+          <div class="headshot"><img src="nuzhat-chowdhury.jpg" alt="Nuzhat Chowdhury headshot"></div>
+          <div>
+            <h3>Nuzhat Chowdhury</h3>
+            <p>Director of Democracy & Justice Program at the New Jersey Institute for Social Justice.</p>
+            <span class="more-cue">Tap for more</span>
+          </div>
+        </button>
+        <span class="speaker-node card" aria-hidden="true"></span>
+      </div>
+
+    </section>
+
+    <section class="section" id="community-tables" aria-label="Community tables">
+      <div class="section-head">
+        <p>Resource Village</p>
+        <h2>Community Tables</h2>
+      </div>
+
+      <div class="table-grid">
+        <article class="table-tile card">
+          <div class="table-icon">CA</div>
+          <div>
+            <h3>Community Affairs and Resource Center</h3>
+            <p>Culturally diverse social services and holistic community support.</p>
+          </div>
+        </article>
+        <article class="table-tile card">
+          <div class="table-icon">LAN</div>
+          <div>
+            <h3>Latino Action Network Foundation</h3>
+            <p>Policy research, outreach, and advocacy for Latino communities in New Jersey.</p>
+          </div>
+        </article>
+        <article class="table-tile card">
+          <div class="table-icon">HF</div>
+          <div>
+            <h3>Healthy Families and Communities</h3>
+            <p>Family-centered support, care, and community resilience.</p>
+          </div>
+        </article>
+        <article class="table-tile card">
+          <div class="table-icon">RA</div>
+          <div>
+            <h3>Resistencia en Accion</h3>
+            <p>Immigrant and working-class rights organizing in New Jersey.</p>
+          </div>
+        </article>
+        <article class="table-tile card">
+          <div class="table-icon">NJ</div>
+          <div>
+            <h3>New Jersey Citizen Action</h3>
+            <p>Political advocacy, public outreach, and empowerment programs.</p>
+          </div>
+        </article>
+        <article class="table-tile card">
+          <div class="table-icon">RU</div>
+          <div>
+            <h3>Rutgers LISTA Program</h3>
+            <p>Culturally informed service and training for Latina/o/x communities.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="quick-help" aria-label="Quick help">
+      <div class="section-head">
+        <p>Save this</p>
+        <h2>Quick Help</h2>
+      </div>
+      <div class="resource-grid">
+        <div class="resource card">
+          <strong>Housing, food, emergency help</strong>
+          <span>NJ 211 - dial 211</span>
+        </div>
+        <div class="resource card">
+          <strong>Mental health crisis</strong>
+          <span>Call or text 988</span>
+        </div>
+        <div class="resource card">
+          <strong>Immediate emergency</strong>
+          <span>Call 911</span>
+        </div>
+        <div class="resource card">
+          <strong>NJ FamilyCare / benefits help</strong>
+          <span>1-800-701-0710</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="person-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-top">
+        <div>
+          <p class="modal-kicker" id="modal-kicker">More about</p>
+          <h2 id="modal-title"></h2>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close popup">x</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: 0.18, rootMargin: "0px 0px -40px 0px" });
+
+    document.querySelectorAll(".card").forEach((item) => observer.observe(item));
+
+    const menuButton = document.querySelector(".menu-button");
+    const menuPanel = document.querySelector("#main-menu");
+
+    function closeMenu() {
+      menuPanel.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuPanel.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    menuPanel.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!menuPanel.contains(event.target) && !menuButton.contains(event.target)) closeMenu();
+    });
+
+    const people = {
+      "bagolie": {
+        title: "Assemblywoman Bagolie",
+        kicker: "Opening panel",
+        body: [
+          "Part of the opening panel, <strong>Mirror Your Representation</strong>, which frames leadership, visibility, public service, and why representation matters in civic spaces."
+        ]
+      },
+      "chaly": {
+        title: "Secretary Chaly",
+        kicker: "Leadership representation",
+        body: [
+          "Brings a higher education perspective to the leadership representation conversation, connecting student voice, opportunity, and public leadership."
+        ]
+      },
+      "rodriguez": {
+        title: "Assemblyman Gabriel Rodriguez",
+        kicker: "Legislative District 33",
+        body: [
+          "Assemblyman Gabriel Rodriguez represents Legislative District 33, which includes West New York, Union City, North Bergen, Weehawken, Guttenberg, and Secaucus.",
+          "Rodriguez served as Mayor of West New York from 2019 to 2023, after nearly twenty years of experience in local and state government, including service as Town Commissioner with responsibility for Public Works, Revenue and Finance, and Public Service.",
+          "Earlier in his career, he worked for nearly a decade as a Field Representative and Campaign Director for Congressman Albio Sires. His background gives him strong experience at the intersection of local and federal policy and politics.",
+          "Raised by parents who were both educators, Rodriguez brings a public service lens to his work with local leaders, grassroots organizations, and community members."
+        ]
+      },
+      "velez": {
+        title: "Mayor Frank Velez",
+        kicker: "Opening panel",
+        body: [
+          "Brings a local leadership lens to the representation panel, grounding the conversation in community-level service and public responsibility."
+        ]
+      },
+      "morales": {
+        title: "Assemblywoman Carmen Theresa Morales",
+        kicker: "Legislative District 34",
+        body: [
+          "Assemblywoman Carmen Theresa Morales serves in the New Jersey General Assembly for the 34th Legislative District.",
+          "She is a member of the Education Committee, Commerce, Economic Development, and Agriculture Committee, and the Joint Committee on the Public Schools.",
+          "Morales made history as the first Puerto Rican Assemblywoman in Essex County, continuing her journey of advocating for education, community advancement, and empowering women.",
+          "She is a dedicated education professional with over 22 years of experience and currently serves as Director of Curriculum and Instruction for the Essex County Schools of Technology."
+        ]
+      },
+      "collazos": {
+        title: "Assemblywoman Alixon Collazos-Gill",
+        kicker: "Legislative District 27",
+        body: [
+          "Assemblywoman Alixon Collazos-Gill represents New Jersey's 27th District in the New Jersey State Assembly.",
+          "Elected to her first term in November 2023 and sworn into office in January 2024, she became the first Colombian immigrant to represent the district or serve in the New Jersey State Assembly.",
+          "She serves as Deputy Conference Leader, Vice Chair of the Environmental and Solid Waste Committee, and as a member of the Children, Families and Food Security Committee and the Regulated Professions Committee.",
+          "She is also recognized as one of New Jersey's top Spanish-language media and political consultants, specializing in outreach to New Jersey's diverse Latino community."
+        ]
+      },
+      "candelario": {
+        title: "Dr. Candelario",
+        kicker: "Mental wellbeing",
+        body: [
+          "Requested moderator for the mental wellbeing breakout with Dr. Lopez and Dr. Paz. This session helps connect leadership with emotional health and community care."
+        ]
+      },
+      "matos-pimentel": {
+        title: "David Matos + Tiana Pimentel",
+        kicker: "Arts & advocacy",
+        body: [
+          "Session leads for advocacy and its intersection with the arts, storytelling, and leadership. This is a strong fit for the summit's creative civic engagement thread."
+        ]
+      },
+      "cordero": {
+        title: "Chris Cordero",
+        kicker: "Financial literacy",
+        body: [
+          "Financial literacy session lead focused on helping attendees build practical money skills, confidence, and everyday tools for ownership."
+        ]
+      },
+      "javier-robles": {
+        title: "Javier Robles, J.D.",
+        kicker: "President, Latino Action Network",
+        body: [
+          "Javier Robles is a distinguished Puerto Rican-American leader, educator, and advocate dedicated to advancing Latino/a/x, disability rights, and public service.",
+          "A proud alumnus of Seton Hall Law School and Rutgers University, where he earned a dual bachelor's degree in Sociology and Puerto Rican and Caribbean Studies, Robles combines legal expertise with a passion for community empowerment.",
+          "As an Assistant Teaching Professor in Rutgers' Kinesiology and Health Department, he directs the Center for Disability Sports, Health, and Wellness and helped create the Disability Studies Minor at Rutgers University.",
+          "Robles holds leadership roles including President of the Latino Action Network of New Jersey and Chair of the New Jersey Disabilities COVID-19 Action Committee. He has also served on national boards and commissions, including the United Spinal Association and the Robert Wood Johnson Foundation National Commission on Public Health Data Systems."
+        ]
+      },
+      "quijano": {
+        title: "Assemblywoman Annette Quijano",
+        kicker: "Speaker Pro Tempore",
+        body: [
+          "Assemblywoman Annette Quijano has represented the 20th Legislative District since 2008 and has earned a reputation as a champion legislator.",
+          "She works on issues affecting seniors, veterans, women, children, workers, and middle-class families.",
+          "Quijano is Vice-Chairwoman of the Consumer Affairs Committee and a member of the Housing and Labor Committees.",
+          "She also serves as the first woman and Latina Speaker Pro Tempore and is a member of the New Jersey Legislative Latino Caucus."
+        ]
+      },
+      "patricia-campos-medina": {
+        title: "Dr. Patricia Campos-Medina",
+        kicker: "Political leader, labor champion, educator & activist",
+        body: [
+          "Dr. Patricia Campos-Medina is a political scientist, labor and community leader with a distinguished record of advancing policies that support American workers and unions.",
+          "In 2024, she ran for U.S. Senate in New Jersey's Democratic primary, earning second place and making history as the first woman and first Latina to appear on the ballot for a U.S. Senate seat in the state.",
+          "In 2025, she served as Senior Advisor and Vice-Chair for Mikie Sherrill's gubernatorial campaign and co-chaired the Governor-elect's Transition Team on Jobs, Opportunity, and Prosperity.",
+          "She is the co-founder and President of Latina Civic Action and a board member of PODER PAC, organizations dedicated to increasing Latina representation in public office.",
+          "She holds a PhD from Rutgers University and a BS and MPA from Cornell University, and serves as a faculty member and Executive Director of The Worker Institute at Cornell University's School of Industrial and Labor Relations."
+        ]
+      },
+      "david-matos": {
+        title: "David Matos, Jr.",
+        kicker: "Ten Steps to Advocacy",
+        body: [
+          "David Matos, Jr. is a seasoned career public servant with over forty years of experience in government and public affairs.",
+          "He has held senior executive branch and legislative positions including chief of staff at two cabinet-level departments in New Jersey state government, special assistant to the Governor, director of the state Office of Hispanic Affairs, director of policy and research for the NJ General Assembly, and associate dean of one of the state's medical schools.",
+          "His policy work has emphasized health care, public safety, homeland security, urban affairs, and transportation.",
+          "His knowledge of the legislature and executive agencies, along with a broad network inside and outside government, has made him one of New Jersey's most sought-after public affairs strategists.",
+          "He is a graduate of Rutgers College, the Rutgers Graduate School of Social Work, and the Kennedy School of Government at Harvard University."
+        ]
+      },
+      "tiana-pimentel": {
+        title: "Tiana Pimentel",
+        kicker: "Arts & advocacy",
+        body: [
+          "Tiana Pimentel is a New Jersey-based Dominican-American sculptor and printmaker whose work addresses the effects of colonial-religious influence across the Caribbean diaspora.",
+          "Working in mixed-media installation, Pimentel engages with the conceptual and material specificities that ground Caribbean culture, with a focus on ancestral connection.",
+          "They hold a BFA in Sculpture and Printmaking from Mason Gross School of the Arts at Rutgers University and are currently developing a body of work based in ceramics."
+        ]
+      },
+      "erika-nava": {
+        title: "Erika J. Nava",
+        kicker: "From Protest to Policy",
+        body: [
+          "Erika J. Nava is the Executive Director of the New Jersey Latino Caucus Foundation, where she led the launch of its inaugural internship cohort.",
+          "She also serves as Associate Executive Director of the New Jersey Senate Majority Office and Director of Policy for the Senate Majority Leader.",
+          "In that role, she has shaped legislation signed into law, including the Language Access Law, New Jersey's student literacy laws, preschool expansion, updated special education standards, workforce housing, and consumer protection measures.",
+          "Born in Mexico City and raised in Perth Amboy, Nava is widely regarded as an expert on immigration policy and Latino issues and has been interviewed by English- and Spanish-language media.",
+          "She holds a Master of Public Policy from Rutgers' Bloustein School and a B.A. in Political Science and Latino Studies from Douglass College."
+        ]
+      },
+      "allison-garcia": {
+        title: "Allison Garcia",
+        kicker: "Immigration session",
+        body: [
+          "Allison Garcia is a 17-year-old first-generation Latina and youth organizer from South Jersey.",
+          "Her work is rooted in her personal experience with her mother's deportation, which drives her to speak out for immigrant justice.",
+          "As a youth justice intern with El Pueblo Unido of Atlantic City, she organizes, advocates, and uplifts youth voices within her community.",
+          "She is passionate about making sure young people are heard and creating change that protects families like hers."
+        ]
+      },
+      "ulla-berg": {
+        title: "Ulla D. Berg",
+        kicker: "Immigration session",
+        body: [
+          "Ulla D. Berg is Associate Professor and Chair of Latino and Caribbean Studies at Rutgers University.",
+          "A socio-cultural and visual anthropologist by training, her research and teaching focus on Latin American migrations, borders and carceral regimes, and U.S. Latinx communities.",
+          "Berg is the author and editor of several books, including the award-winning edited collection <strong>Latinas/os in New Jersey: Histories, Communities, and Cultures</strong> and <strong>Elizabeth Detention Center: A Social History of Confinement in New Jersey and the United States</strong>.",
+          "She is also a board member with First Friends of New Jersey and New York and with Envision Freedom Fund."
+        ]
+      },
+      "marisol-conde": {
+        title: "Marisol Conde-Hernandez, Esq.",
+        kicker: "Immigration session",
+        body: [
+          "Marisol Conde-Hernandez is a Managing Attorney at the Law Office of Eric M. Mark and serves as Chair of the NJ State Bar Association's Immigration Law Section.",
+          "She handles a wide range of non-business immigration matters, including family immigration, humanitarian relief, detained and non-detained removal defense, consular processing, waivers, naturalization, and agency, state, and federal appeals.",
+          "Her state practice is limited to municipal, criminal, and family law matters, particularly as those issues arise for existing and new non-citizen clients.",
+          "Marisol was the first undocumented graduate of a New Jersey law school and brings over a decade of experience engaging New Jersey's immigrant community to her practice of law."
+        ]
+      },
+      "nuzhat-chowdhury": {
+        title: "Nuzhat Chowdhury",
+        kicker: "Afternoon general session",
+        body: [
+          "Nuzhat Chowdhury is the Director of Democracy & Justice Program at the New Jersey Institute for Social Justice.",
+          "She came to the Institute from the Brennan Center for Justice, where she worked as a legal and legislative consultant on projects to reform elections administration in New York and increase election security across the country.",
+          "Prior to the Brennan Center, Chowdhury worked at the New York City Council as legislative and committee counsel to the committees on Aging, Civil Service & Labor, and Veterans."
+        ]
+      }
+    };
+
+    const modal = document.querySelector("#person-modal");
+    const modalTitle = document.querySelector("#modal-title");
+    const modalKicker = document.querySelector("#modal-kicker");
+    const modalBody = document.querySelector("#modal-body");
+    const closeModal = document.querySelector(".modal-close");
+
+    function openModal(key) {
+      const person = people[key];
+      if (!person) return;
+      modalTitle.textContent = person.title;
+      modalKicker.textContent = person.kicker;
+      modalBody.innerHTML = person.body.map((line) => `<p>${line}</p>`).join("");
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      closeModal.focus();
+    }
+
+    function hideModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll("[data-person]").forEach((card) => {
+      card.addEventListener("click", () => openModal(card.dataset.person));
+    });
+
+    closeModal.addEventListener("click", hideModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) hideModal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) hideModal();
+      if (event.key === "Escape" && menuPanel.classList.contains("is-open")) closeMenu();
+    });
+  </script>
+</body>
+</html>
