@@ -15,6 +15,8 @@
       --paper-warm: #fbfaf7;
       --muted: #5f6672;
       --line: #e7ebf2;
+      --font-body: "Avenir Next", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+      --font-display: "American Typewriter", Rockwell, "Courier New", serif;
       --shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
       --deep-shadow: 0 18px 0 rgba(0, 62, 107, 0.08), 0 24px 40px rgba(0, 0, 0, 0.12);
     }
@@ -31,16 +33,19 @@
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(90deg, var(--orange) 0 10px, transparent 10px calc(100% - 10px), var(--orange) calc(100% - 10px)),
-        radial-gradient(circle at 18px 18px, rgba(0, 62, 107, 0.045) 1px, transparent 1.4px) 0 0 / 28px 28px,
+        linear-gradient(90deg, var(--orange) 0 8px, transparent 8px calc(100% - 8px), var(--orange) calc(100% - 8px)),
+        radial-gradient(circle at 18px 18px, rgba(0, 62, 107, 0.055) 1px, transparent 1.4px) 0 0 / 28px 28px,
         var(--paper-warm);
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-body);
     }
 
     .shell {
       width: min(100%, 520px);
       margin: 0 auto;
       padding: 12px 18px 46px;
+      background:
+        linear-gradient(90deg, transparent 0 29px, rgba(199, 15, 54, 0.09) 29px 30px, transparent 30px),
+        repeating-linear-gradient(180deg, transparent 0 31px, rgba(0, 62, 107, 0.035) 31px 32px);
     }
 
     .top-nav {
@@ -61,6 +66,8 @@
       color: var(--blue);
       font-size: 13px;
       font-weight: 800;
+      font-family: var(--font-display);
+      line-height: 1.25;
     }
 
     .menu-button {
@@ -165,8 +172,9 @@
     }
 
     .logo-lockup {
+      position: relative;
       display: grid;
-      grid-template-columns: 82px 1fr;
+      grid-template-columns: 76px 1fr;
       gap: 12px;
       align-items: center;
       padding: 10px;
@@ -176,9 +184,21 @@
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
     }
 
+    .logo-lockup::before {
+      content: "";
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      width: 66px;
+      height: 15px;
+      background: rgba(247, 211, 111, 0.72);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      transform: translateX(-50%) rotate(-2deg);
+    }
+
     .lan-logo {
-      width: 82px;
-      height: 82px;
+      width: 76px;
+      height: 76px;
       object-fit: contain;
     }
 
@@ -202,8 +222,25 @@
       max-height: 38px;
     }
 
+    .rulaa-logo {
+      width: 94%;
+      max-height: 38px;
+    }
+
     .title-wrap {
+      position: relative;
       margin: 38px 0 36px;
+    }
+
+    .title-wrap::after {
+      content: "";
+      display: block;
+      width: 86px;
+      height: 7px;
+      margin-top: 17px;
+      background: var(--orange);
+      transform: rotate(-1.5deg);
+      opacity: 0.8;
     }
 
     .eyebrow {
@@ -214,6 +251,8 @@
       color: var(--blue);
       font-size: 13px;
       font-weight: 750;
+      font-family: var(--font-display);
+      line-height: 1.3;
       text-transform: uppercase;
     }
 
@@ -229,21 +268,21 @@
       margin: 0;
       max-width: 420px;
       font-size: clamp(48px, 15vw, 76px);
-      line-height: 0.92;
+      line-height: 1.02;
       letter-spacing: 0;
-      font-weight: 850;
+      font-weight: 700;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .event-name {
       margin: 20px 0 0;
       color: var(--blue);
       font-size: clamp(21px, 6vw, 30px);
-      line-height: 1.08;
+      line-height: 1.18;
       font-weight: 800;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .hero-card {
@@ -343,15 +382,15 @@
       margin: 0;
       color: var(--ink);
       font-size: 26px;
-      line-height: 1.08;
-      font-weight: 820;
+      line-height: 1.2;
+      font-weight: 700;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .village {
       display: block;
-      padding: 18px;
+      padding: 14px 15px;
       border: 1px solid var(--line);
       border-left: 5px solid var(--orange);
       border-radius: 8px;
@@ -366,29 +405,29 @@
     }
 
     .village h2 {
-      margin: 0 0 10px;
+      margin: 0 0 6px;
       color: var(--blue);
-      font-size: 24px;
-      line-height: 1.08;
-      font-weight: 820;
+      font-size: 21px;
+      line-height: 1.2;
+      font-weight: 700;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .village p {
       margin: 0;
       color: var(--muted);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 650;
-      line-height: 1.42;
+      line-height: 1.32;
     }
 
     .village-cta {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 14px;
-      padding: 8px 10px;
+      margin-top: 9px;
+      padding: 6px 8px;
       border-radius: 7px;
       background: rgba(0, 62, 107, 0.08);
       color: var(--blue);
@@ -456,7 +495,8 @@
       color: var(--red);
       font-size: 14px;
       font-weight: 800;
-      line-height: 1;
+      font-family: var(--font-display);
+      line-height: 1.25;
       text-transform: uppercase;
     }
 
@@ -464,10 +504,10 @@
       margin: 0;
       color: var(--ink);
       font-size: 22px;
-      line-height: 1.08;
-      font-weight: 820;
+      line-height: 1.2;
+      font-weight: 700;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .agenda-card p {
@@ -494,18 +534,6 @@
       font-weight: 780;
       line-height: 1;
       text-transform: uppercase;
-    }
-
-    .status-note {
-      margin: 14px 0;
-      padding: 12px;
-      border: 1px solid rgba(199, 15, 54, 0.18);
-      border-radius: 8px;
-      background: rgba(199, 15, 54, 0.06);
-      color: var(--ink);
-      font-size: 14px;
-      font-weight: 650;
-      line-height: 1.35;
     }
 
     .room-map,
@@ -556,6 +584,8 @@
       color: var(--red);
       font-size: 13px;
       font-weight: 850;
+      font-family: var(--font-display);
+      line-height: 1.3;
       text-transform: uppercase;
     }
 
@@ -594,7 +624,7 @@
     .speaker-card {
       position: relative;
       display: grid;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: auto auto;
       gap: 0;
       width: 100%;
       min-width: 0;
@@ -676,10 +706,11 @@
       margin: 0;
       color: var(--ink);
       font-size: clamp(14px, 3.6vw, 17px);
-      line-height: 1.16;
-      font-weight: 780;
+      line-height: 1.25;
+      font-weight: 700;
       text-transform: none;
       overflow-wrap: anywhere;
+      font-family: var(--font-display);
     }
 
     .speaker-card p {
@@ -687,11 +718,9 @@
       color: var(--muted);
       font-size: 12px;
       font-weight: 620;
-      line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      line-height: 1.4;
+      display: block;
+      overflow: visible;
     }
 
     .expert-board {
@@ -740,16 +769,16 @@
 
     .table-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
     .table-tile {
-      aspect-ratio: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 12px;
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: white;
@@ -760,17 +789,17 @@
     .table-icon {
       display: grid;
       place-items: center;
-      width: 44px;
-      height: 44px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
       background: var(--blue);
       color: white;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 780;
     }
 
     .table-tile h3 {
-      margin: 10px 0 0;
+      margin: 0;
       color: var(--ink);
       font-size: clamp(13px, 3.5vw, 16px);
       line-height: 1.1;
@@ -779,13 +808,13 @@
     }
 
     .table-tile p {
-      margin: 6px 0 0;
+      margin: 3px 0 0;
       color: var(--muted);
       font-size: clamp(11px, 3vw, 13px);
       font-weight: 620;
       line-height: 1.18;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -823,10 +852,10 @@
       margin: 0;
       color: var(--ink);
       font-size: 17px;
-      line-height: 1.08;
-      font-weight: 780;
+      line-height: 1.2;
+      font-weight: 700;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .person p {
@@ -920,10 +949,10 @@
       margin: 0;
       color: var(--blue);
       font-size: 28px;
-      line-height: 1.04;
-      font-weight: 820;
+      line-height: 1.16;
+      font-weight: 700;
       text-transform: none;
-      font-family: "Trebuchet MS", "Nunito Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      font-family: var(--font-display);
     }
 
     .modal-close {
@@ -992,11 +1021,12 @@
     <section class="hero">
       <div class="binder-strip" aria-hidden="true"></div>
 
-      <div class="logo-lockup" aria-label="Latino Action Network, Rutgers CLAC, and LISTA">
+      <div class="logo-lockup" aria-label="Latino Action Network and Rutgers partner organizations">
         <img class="lan-logo" src="lan-logo.png" alt="Latino Action Network logo">
         <div class="partner-stack">
           <img class="partner-logo clac-logo" src="clac-logo.png" alt="Rutgers Center for Latino Arts and Culture logo">
           <img class="partner-logo" src="lista-logo.png" alt="Rutgers School of Social Work LISTA logo">
+          <img class="partner-logo rulaa-logo" src="rulaa-logo.png" alt="Rutgers University Latino Alumni Association logo">
         </div>
       </div>
 
@@ -1036,7 +1066,7 @@
     <section class="section village-section">
       <a class="village card" href="#community-tables" aria-label="Jump to Resource Community Village tables">
         <h2>Resource Community Village</h2>
-        <p>Meet community partners, ask questions, and connect with organizations offering services, advocacy, wellness support, civic resources, and family-centered guidance.</p>
+        <p>Meet community organizations offering services, advocacy, wellness support, and civic resources.</p>
         <span class="village-cta">Click here to see more</span>
       </a>
     </section>
@@ -1045,10 +1075,6 @@
       <div class="section-head">
         <p>September 26</p>
         <h2>Agenda Overview</h2>
-      </div>
-
-      <div class="status-note card">
-        Needs confirmation: the agenda overview lists First Breakout Sessions as 11:00 AM - 12:00 PM, while the room grid in the working agenda also references a 10:30 AM - 12:00 PM morning block.
       </div>
 
       <div class="agenda">
@@ -1061,27 +1087,29 @@
         <article class="agenda-card card">
           <span class="time">9:30 - 10:30 AM</span>
           <h3>Kick-Off + Panel</h3>
-          <p><strong>Mirror Your Representation</strong> opens the day with civic leadership, visibility, and public service.</p>
+          <p><strong>Mirror Your Representation</strong> introduces New Jersey's Latino elected leaders and explores their vision for equity and prosperity for the state's Latino community.</p>
           <div class="tags">
-            <span class="tag">ABE 2225 / Main Gathering Room?</span>
-            <span class="tag">Assemblywoman Bagolie</span>
-            <span class="tag">Secretary Chaly</span>
-            <span class="tag">Assemblyman Rodriguez</span>
-            <span class="tag">Morales</span>
-            <span class="tag">Collazos-Gill</span>
+            <span class="tag">ABE 2225 / Main Gathering Room</span>
+            <span class="tag">Annette Quijano</span>
+            <span class="tag">Carmen Theresa Morales</span>
+            <span class="tag">Alixon Collazos-Gill</span>
+            <span class="tag">Gabriel Rodriguez</span>
+            <span class="tag">Margo Chaly</span>
             <span class="tag">Mayor Frank Velez</span>
           </div>
         </article>
 
         <article class="agenda-card card">
-          <span class="time">11:00 AM - 12:00 PM</span>
-          <h3>First Breakouts</h3>
+          <span class="time">10:30 AM - 12:00 PM</span>
+          <h3>Morning Breakouts</h3>
           <p>Choose a focused session and go deeper with facilitators and community leaders.</p>
           <div class="tags">
             <span class="tag">Rooms vary</span>
             <span class="tag">Mental Wellness</span>
-            <span class="tag">From Protest to Policy</span>
             <span class="tag">Financial Literacy</span>
+            <span class="tag">Immigration</span>
+            <span class="tag">10 Steps to Advocacy</span>
+            <span class="tag">Afro Latino Experience</span>
           </div>
         </article>
 
@@ -1093,13 +1121,13 @@
 
         <article class="agenda-card card">
           <span class="time">12:30 - 2:00 PM</span>
-          <h3>Second Breakouts</h3>
+          <h3>Afternoon Breakouts</h3>
           <p>Continue with afternoon sessions across advocacy, rights, leadership, and storytelling.</p>
           <div class="tags">
             <span class="tag">Rooms vary</span>
-            <span class="tag">10 Steps to Advocacy</span>
+            <span class="tag">From Protest to Policy</span>
+            <span class="tag">Voting Protection</span>
             <span class="tag">Know Your Rights</span>
-            <span class="tag">Afro Latino Experience</span>
           </div>
         </article>
 
@@ -1108,7 +1136,7 @@
           <h3>General Session + Closing</h3>
           <p>Return to the main room for final reflections, next steps, and closing remarks.</p>
           <div class="tags">
-            <span class="tag">Main Gathering Room?</span>
+            <span class="tag">ABE 2225 / Main Gathering Room</span>
           </div>
         </article>
       </div>
@@ -1124,7 +1152,7 @@
       <div class="room-map">
         <article class="room-card card">
           <strong>ABE 2225</strong>
-          <span>Legislators Panel / Main Gathering Room / Afternoon General Session Panel. Needs confirmation because multiple uses are listed.</span>
+          <span>Main Gathering Room: opening legislative panel and afternoon general session.</span>
         </article>
         <article class="room-card card">
           <strong>ABE 2200</strong>
@@ -1132,7 +1160,7 @@
         </article>
         <article class="room-card card">
           <strong>ABE 2400</strong>
-          <span>Financial Literacy in the morning; 10 Steps to Advocacy in the afternoon.</span>
+          <span>Financial Literacy during the morning block.</span>
         </article>
         <article class="room-card card">
           <strong>ABE 3200</strong>
@@ -1144,7 +1172,25 @@
         </article>
         <article class="room-card card">
           <strong>ABE 4225</strong>
-          <span>Afro Latino Experience. Morning/afternoon placement needs confirmation.</span>
+          <span>Afro Latino Experience during the morning block.</span>
+        </article>
+      </div>
+
+      <h3 class="section-label">Opening Legislative Panel</h3>
+      <div class="session-list">
+        <article class="session-card card">
+          <strong>Mirror Your Representation</strong>
+          <span>ABE 2225 | 9:30 - 10:30 AM</span>
+          <p>The Latino Action Network welcomes New Jersey's Latino elected leaders and lawmakers. The conversation introduces these leaders to the community and explores their vision for New Jersey's Latino population, including how their leadership can advance equity and prosperity.</p>
+          <div class="tags">
+            <span class="tag">Moderator: Mel / Latino Student Council</span>
+            <span class="tag">Annette Quijano</span>
+            <span class="tag">Carmen Theresa Morales</span>
+            <span class="tag">Alixon Collazos-Gill</span>
+            <span class="tag">Gabriel Rodriguez</span>
+            <span class="tag">Margo Chaly</span>
+            <span class="tag">Frank Velez</span>
+          </div>
         </article>
       </div>
 
@@ -1152,48 +1198,51 @@
       <div class="session-list">
         <article class="session-card card">
           <strong>Mental Wellness</strong>
-          <span>Room: ABE 2200 | Time: morning block needs confirmation</span>
-          <p><strong>Proposed copy:</strong> A LISTA School of Social Work session centering mental wellbeing, community care, and practical strategies for sustaining leadership.</p>
+          <span>ABE 2200 | 10:30 AM - 12:00 PM</span>
+          <p>This session explores how identity formation affects mental health and well-being among young Latinos by connecting sociocultural and psychological experiences. It examines the stress of negotiating ethnic identity in stigmatizing environments and identifies ways Latino communities support emotional well-being.</p>
           <div class="tags">
-            <span class="tag">Moderator: Dr. Candelario?</span>
-            <span class="tag">Panelists: Dr. Lopez & Dr. Paz?</span>
+            <span class="tag">Moderator: Maria Montesino</span>
+            <span class="tag">Dr. Gloria Lopez-Henriquez</span>
           </div>
         </article>
         <article class="session-card card">
           <strong>Financial Literacy</strong>
-          <span>Room: ABE 2400 | Time: morning block needs confirmation</span>
-          <p><strong>Proposed copy:</strong> A practical session focused on building financial confidence, everyday money skills, and tools attendees can use beyond the summit.</p>
-          <div class="tags">
-            <span class="tag">Chris Cordero?</span>
-          </div>
+          <span>ABE 2400 | 10:30 AM - 12:00 PM</span>
+          <p>A practical session focused on building financial confidence, everyday money skills, and tools attendees can use beyond the summit.</p>
         </article>
         <article class="session-card card">
           <strong>Immigration Session</strong>
-          <span>Room: ABE 3200 | Time: morning block needs confirmation</span>
-          <p><strong>Proposed copy:</strong> A session focused on immigrant justice, lived experience, legal context, and community resources for families and advocates.</p>
+          <span>ABE 3200 | 10:30 AM - 12:00 PM</span>
+          <p>A session focused on immigrant justice, lived experience, legal context, and community resources for families and advocates.</p>
           <div class="tags">
-            <span class="tag">Allison Garcia</span>
+            <span class="tag">Moderator: Allison Garcia</span>
             <span class="tag">Ulla D. Berg</span>
             <span class="tag">Marisol Conde-Hernandez</span>
           </div>
+        </article>
+        <article class="session-card card">
+          <strong>10 Steps to Advocacy</strong>
+          <span>ABE 4400 | 10:30 AM - 12:00 PM</span>
+          <p>This session engages participants in practical steps any person or group can take to move from being concerned to becoming an effective advocate for change.</p>
+          <p>Participants will work in small groups to develop an advocacy plan for a fictional scenario involving a Latino-oriented arts organization whose state funding is being threatened.</p>
+          <div class="tags">
+            <span class="tag">David Matos, Jr.</span>
+            <span class="tag">Tiana Pimentel</span>
+          </div>
+        </article>
+        <article class="session-card card">
+          <strong>Afro Latino Experience</strong>
+          <span>ABE 4225 | 10:30 AM - 12:00 PM</span>
+          <p>A conversation centering Afro Latino identity, leadership, community experience, and representation within broader Latino civic life.</p>
         </article>
       </div>
 
       <h3 class="section-label">Afternoon Sessions</h3>
       <div class="session-list">
         <article class="session-card card">
-          <strong>10 Steps to Advocacy</strong>
-          <span>Room: ABE 2400 or ABE 4400 | Needs confirmation</span>
-          <p>This session engages participants in practical steps any person or group can take to move from being concerned to becoming an effective advocate for change.</p>
-          <p>Participants will work in small groups to develop an advocacy plan for a fictional scenario involving a Latino-oriented arts organization whose state funding is being threatened.</p>
-          <div class="tags">
-            <span class="tag">David Matos, Jr.</span>
-          </div>
-        </article>
-        <article class="session-card card">
           <strong>From Protest to Policy</strong>
-          <span>Room: ABE 4400 | Time/placement needs confirmation</span>
-          <p><strong>Proposed copy:</strong> A policy-focused session on how lived experience, advocacy, and organizing can move from public pressure into legislative and institutional change.</p>
+          <span>ABE 4400 | 12:30 - 2:00 PM</span>
+          <p>A policy-focused session on how lived experience, advocacy, and organizing can move from public pressure into legislative and institutional change.</p>
           <div class="tags">
             <span class="tag">Moderator: Cuqui Rivera</span>
             <span class="tag">Daniela Velez</span>
@@ -1201,14 +1250,12 @@
           </div>
         </article>
         <article class="session-card card">
-          <strong>Afro Latino Experience</strong>
-          <span>Room: ABE 4225 | Time needs confirmation</span>
-          <p><strong>Proposed copy:</strong> A conversation centering Afro Latino identity, leadership, community experience, and representation within broader Latino civic life.</p>
+          <strong>Voting Protection</strong>
+          <span>ABE 2200 | 12:30 - 2:00 PM</span>
         </article>
         <article class="session-card card">
-          <strong>Know Your Rights / Voting Protection</strong>
-          <span>Rooms: ABE 3200 / ABE 2200 | Relationship between these titles needs confirmation</span>
-          <p><strong>Proposed copy:</strong> A civic education session focused on rights, voting protection, and tools for navigating public systems with confidence.</p>
+          <strong>Know Your Rights</strong>
+          <span>ABE 3200 | 12:30 - 2:00 PM</span>
         </article>
       </div>
     </section>
