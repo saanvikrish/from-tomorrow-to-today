@@ -1164,6 +1164,46 @@
       line-height: 1.4;
     }
 
+    .sponsors {
+      margin-top: 34px;
+      padding: 30px 0 8px;
+      border-top: 2px solid rgba(199, 15, 54, 0.16);
+      text-align: center;
+    }
+
+    .sponsors p {
+      margin: 0;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .sponsors h2 {
+      margin: 6px 0 0;
+      color: var(--blue);
+      font-family: var(--font-display);
+      font-size: 34px;
+      line-height: 1.05;
+    }
+
+    .sponsor-logos {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(86px, 0.55fr);
+      gap: 22px;
+      align-items: center;
+      width: min(100%, 620px);
+      margin: 22px auto 0;
+    }
+
+    .sponsor-logos img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 112px;
+      object-fit: contain;
+    }
+
     .lan-footer {
       margin: 42px -18px -46px;
       padding: 30px 18px 34px;
@@ -1226,6 +1266,10 @@
     }
 
     @media (max-width: 390px) {
+      .sponsors h2 {
+        font-size: 28px;
+      }
+
       .agenda-card {
         grid-template-columns: 86px minmax(0, 1fr);
         column-gap: 12px;
@@ -1858,6 +1902,15 @@
           <strong>NJ FamilyCare / benefits help</strong>
           <span>1-800-701-0710</span>
         </div>
+      </div>
+    </section>
+
+    <section class="sponsors" aria-labelledby="sponsors-title">
+      <p>With gratitude</p>
+      <h2 id="sponsors-title">Thank You to Our Sponsors</h2>
+      <div class="sponsor-logos">
+        <img src="lisc-new-jersey.png" alt="LISC New Jersey">
+        <img src="lan-foundation-10.png" alt="Latino Action Network Foundation 10th anniversary">
       </div>
     </section>
 
