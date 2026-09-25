@@ -1200,6 +1200,31 @@
       outline: 0;
     }
 
+    .lan-footer .maker-credit {
+      display: block;
+      min-height: 0;
+      margin-top: 18px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.68);
+      font-family: var(--body-font);
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .lan-footer .maker-credit:hover,
+    .lan-footer .maker-credit:focus-visible {
+      background: transparent;
+      color: white;
+      outline: 2px solid white;
+      outline-offset: 3px;
+    }
+
     @media (max-width: 390px) {
       .agenda-card {
         grid-template-columns: 86px minmax(0, 1fr);
@@ -1839,6 +1864,7 @@
     <footer class="lan-footer">
       <strong>Keep building power with LAN</strong>
       <a href="https://www.lanfoundation.org/" target="_blank" rel="noopener noreferrer">Visit LANFoundation.org</a>
+      <a class="maker-credit" href="https://saanvikrish.github.io/saanvikrishnarajpetportfolio/" target="_blank" rel="noopener noreferrer">Made by Saanvi Krishnarajpet · See more work here</a>
     </footer>
 
   </main>
