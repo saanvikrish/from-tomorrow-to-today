@@ -2,4 +2,8 @@
 
 Mobile program agenda for the Latino Action Network event in collaboration with Rutgers CLAC and LISTA.
 
-The publishable website is in `outputs/`. Cloudflare Pages should use `outputs` as its build output directory with no build command.
+Public website: https://saanvikrish.github.io/from-tomorrow-to-today/
+
+The publishable website is in `outputs/`. A GitHub Actions workflow publishes that directory to GitHub Pages after changes are pushed to `main`.
+
+See [EDITOR_GUIDE.md](EDITOR_GUIDE.md) for detailed setup, editing, review, and publishing instructions.
