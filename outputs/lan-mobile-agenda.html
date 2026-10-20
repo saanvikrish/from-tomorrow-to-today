@@ -8,7 +8,7 @@
   <meta name="description" content="Mobile program agenda for From Tomorrow to Today on October 24, 2026 at Rutgers University-New Brunswick.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{--paper:#f6f3ec;--white:#fffefa;--ink:#17212b;--muted:#5d6873;--navy:#0b3d67;--red:#cc173a;--aqua:#13a8ad;--gold:#f2b544;--line:#d8dde1;--shadow:5px 6px 0 rgba(11,61,103,.12)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:"DM Sans",Arial,sans-serif;line-height:1.45}body.modal-open{overflow:hidden}button,a{font:inherit}button{color:inherit}img{display:block;max-width:100%}a{color:inherit}:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
@@ -28,13 +28,37 @@
     @media(max-width:520px){.section{width:calc(100% - 28px)}.binder{width:30px}.binder:before{inset-inline:4px}.hero-inner{width:calc(100% - 52px);margin-left:40px}.logos .partner{height:21px;max-width:126px}.meta{grid-template-columns:1fr;gap:12px}.overview-row{grid-template-columns:1fr auto}.overview-time{grid-column:1/-1}.room{grid-column:auto}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab:first-child{grid-column:1/-1}.session summary{grid-template-columns:1fr 34px}.session-time{grid-column:1/-1}.session-body{padding:0 4px 28px}.session-people{grid-template-columns:1fr}.people-grid{grid-template-columns:repeat(2,1fr)}.modal-card{padding:28px 20px}.modal-person{grid-template-columns:84px 1fr;gap:14px}.modal-person img{width:84px;height:84px}.modal-person h2{font-size:1.55rem}}
     .session{scroll-margin-top:72px}
     @media(max-width:800px){h1{font-size:clamp(3rem,13vw,4.6rem)}}
+
+    /* V2.1: the lighter, more playful timeline treatment */
+    body{font-family:"Plus Jakarta Sans",Arial,sans-serif}
+    h1,.date,.section-head h2,.links h2,.modal-person h2{font-family:"Bricolage Grotesque",Arial,sans-serif}
+    .hero:before,.hero:after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none}
+    .hero:before{width:330px;height:330px;right:-115px;top:70px;background:#f15422}
+    .hero:after{width:150px;height:150px;right:18%;bottom:-65px;background:#f2b544}
+    .hero{isolation:isolate}.hero-inner{position:relative;z-index:1}.ticket{box-shadow:8px 9px 0 rgba(11,61,103,.22)}
+    .directory{position:relative;overflow:hidden}.directory:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-210px;top:120px;background:#f15422;opacity:.92}.directory .section{position:relative;z-index:1}
+    .people-grid{position:relative;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 64px;padding:8px 0}
+    .people-grid:before{content:"";position:absolute;top:0;bottom:0;left:50%;width:3px;background:#65d4d0;transform:translateX(-50%)}
+    .profile{position:relative;min-height:142px;padding:14px;color:var(--ink);background:var(--white);border-top:6px solid #f15422;box-shadow:5px 6px 0 rgba(0,0,0,.18)}
+    .profile:nth-child(odd):after,.profile:nth-child(even):after{content:"";position:absolute;top:34px;width:13px;height:13px;border-radius:50%;background:var(--gold);border:3px solid var(--navy)}
+    .profile:nth-child(odd):after{right:-42px}.profile:nth-child(even):after{left:-42px}
+    .profile img{width:88px;height:88px;aspect-ratio:auto;border-radius:50%;border:3px solid var(--navy)}
+    .profile strong{font-size:.93rem}.profile small{color:var(--muted)}.profile:hover strong{color:var(--red)}
+    .people-grid:not(.expanded) .profile:nth-child(n+11){display:none}
+    .show-speakers{display:block;min-height:46px;margin:34px auto 0;padding:0 20px;border:1px solid #fff;color:#fff;background:transparent;font-weight:800;cursor:pointer}.show-speakers:hover{color:var(--navy);background:#fff}
+    .resources{position:relative;overflow:hidden;background:#fff7ef}.resources:after{content:"";position:absolute;width:260px;height:260px;right:-130px;bottom:-140px;border-radius:50%;background:#f15422}.resources .section{position:relative;z-index:1}
+    .resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.resource-tile{aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:#fff;border:1px solid var(--ink);box-shadow:4px 5px 0 rgba(11,61,103,.13)}.resource-tile:nth-child(3n+2){border-top:7px solid var(--aqua)}.resource-tile:nth-child(3n+1){border-top:7px solid var(--red)}.resource-tile:nth-child(3n){border-top:7px solid var(--gold)}.resource-tile span{color:var(--red);font-size:.72rem;font-weight:800}.resource-tile h3{margin:8px 0 0;font-size:1rem;line-height:1.18}.resource-tile p{margin:10px 0 0;color:var(--muted);font-size:.76rem}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}.reveal.visible{opacity:1;transform:none}
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+    @media(max-width:800px){.hero:before{width:230px;height:230px;right:-150px;top:250px}.hero:after{width:100px;height:100px;right:-20px;bottom:170px}.hero-copy{max-width:260px}.people-grid{gap:26px 42px}.profile:nth-child(odd):after{right:-29px}.profile:nth-child(even):after{left:-29px}.resource-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.people-grid{gap:24px 34px}.profile{min-height:0;padding:10px}.profile img{width:70px;height:70px}.profile strong{font-size:.78rem}.profile small{font-size:.64rem}.profile:nth-child(odd):after{right:-25px}.profile:nth-child(even):after{left:-25px}.resource-tile{padding:13px}.resource-tile h3{font-size:.84rem}.resource-tile p{font-size:.68rem}}
   </style>
 </head>
 <body>
   <nav class="site-nav" aria-label="Main navigation">
     <a class="brand-link" href="#top">From Tomorrow to Today</a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <div class="nav-links"><a href="#agenda">Agenda</a><a href="#sessions">Sessions</a><a href="#speakers">Speakers</a><a href="#links">LAN links</a></div>
+    <div class="nav-links"><a href="#agenda">Agenda</a><a href="#sessions">Sessions</a><a href="#speakers">Speakers</a><a href="#resources">Resources</a><a href="#links">LAN links</a></div>
   </nav>
   <main id="top">
     <header class="hero">
@@ -47,7 +71,7 @@
         </div>
         <aside class="ticket" aria-label="Event details">
           <p class="kicker">Save the date</p><p class="date">Saturday<br>October 24, 2026</p>
-          <div class="meta"><div><span>Time</span><strong>9:00 AM - 2:30 PM</strong></div><div><span>Location</span><strong>Rutgers-New Brunswick</strong></div><div><span>Main room</span><strong>ABE 2225</strong></div><div><span>Lunch</span><strong>12:00 - 12:30 PM</strong></div></div>
+          <div class="meta"><div><span>Time</span><strong>9:00 AM - 2:30 PM</strong></div><div><span>Location</span><strong>Rutgers-New Brunswick</strong></div><div><span>Main room</span><strong>ABE 2225</strong></div></div>
           <a class="primary" href="#agenda">View the agenda</a>
         </aside>
       </div>
@@ -75,6 +99,19 @@
     <section class="directory" id="speakers"><div class="section">
       <div class="section-head"><div><p>Meet the people</p><h2>Speakers &amp; Facilitators</h2></div><div class="section-note">Only people assigned to sessions in the October 24 working agenda are shown.</div></div>
       <div class="people-grid" id="people-grid"></div>
+      <button class="show-speakers" type="button" aria-expanded="false">Show all speakers</button>
+    </div></section>
+
+    <section class="resources" id="resources"><div class="section">
+      <div class="section-head"><div><p>Resource Community Village</p><h2>Community Tables</h2></div><div class="section-note">Connect with organizations offering advocacy, wellness, education, and family support.</div></div>
+      <div class="resource-grid">
+        <article class="resource-tile"><span>01</span><div><h3>Community Affairs and Resource Center</h3><p>Culturally responsive social services and community support.</p></div></article>
+        <article class="resource-tile"><span>02</span><div><h3>Latino Action Network Foundation</h3><p>Policy research, outreach, and advocacy across New Jersey.</p></div></article>
+        <article class="resource-tile"><span>03</span><div><h3>Healthy Families and Communities</h3><p>Family-centered support, care, and community resilience.</p></div></article>
+        <article class="resource-tile"><span>04</span><div><h3>Resistencia en Accion</h3><p>Immigrant and working-class rights organizing.</p></div></article>
+        <article class="resource-tile"><span>05</span><div><h3>New Jersey Citizen Action</h3><p>Public advocacy, outreach, and empowerment programs.</p></div></article>
+        <article class="resource-tile"><span>06</span><div><h3>Rutgers LISTA Program</h3><p>Culturally informed service and training for Latina/o/x communities.</p></div></article>
+      </div>
     </div></section>
 
     <section class="links" id="links"><h2>Stay connected</h2><p>Learn more about the Latino Action Network and Latino Action Network Foundation.</p><div class="network-links"><a href="https://lan.nationbuilder.com/" target="_blank" rel="noopener noreferrer">Latino Action Network</a><a href="https://www.lanfoundation.org/" target="_blank" rel="noopener noreferrer">LAN Foundation</a></div></section>
@@ -133,6 +170,12 @@
     document.querySelectorAll('.overview a[href^="#"]').forEach(link=>link.addEventListener("click",event=>{const target=document.querySelector(link.getAttribute("href"));if(!target)return;event.preventDefault();target.open=true;history.replaceState(null,"",link.getAttribute("href"));target.scrollIntoView({behavior:"smooth",block:"start"})}));
     const activeKeys=[...new Set(sessions.flatMap(s=>s.speakers.map(entry=>entry[0]).filter(Boolean)))];
     document.querySelector("#people-grid").innerHTML=activeKeys.map(key=>{const p=people[key];return`<button class="profile" type="button" data-person="${key}"><img src="${p.image}" alt="${p.name}"><strong>${p.name}</strong><small>${p.role}</small></button>`}).join("");
+    const speakerGrid=document.querySelector("#people-grid"),showSpeakers=document.querySelector(".show-speakers");
+    showSpeakers.textContent=`Show all ${activeKeys.length} speakers`;
+    showSpeakers.addEventListener("click",()=>{const expanded=speakerGrid.classList.toggle("expanded");showSpeakers.setAttribute("aria-expanded",String(expanded));showSpeakers.textContent=expanded?"Show fewer speakers":`Show all ${activeKeys.length} speakers`});
+    const revealItems=document.querySelectorAll(".overview-row,.session,.profile,.resource-tile");
+    revealItems.forEach(item=>item.classList.add("reveal"));
+    if("IntersectionObserver" in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}}),{threshold:.12});revealItems.forEach(item=>observer.observe(item))}else{revealItems.forEach(item=>item.classList.add("visible"))}
     document.querySelectorAll(".tab").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(tab=>tab.classList.toggle("active",tab===button));document.querySelectorAll(".session").forEach(session=>{session.hidden=button.dataset.track!=="all"&&session.dataset.trackName!==button.dataset.track})}));
     const modal=document.querySelector("#person-modal"),modalImage=document.querySelector("#modal-image"),modalName=document.querySelector("#modal-name"),modalRole=document.querySelector("#modal-role"),modalBio=document.querySelector("#modal-bio");let lastFocus=null;
     function openPerson(key){const p=people[key];if(!p)return;lastFocus=document.activeElement;modalImage.src=p.image;modalImage.alt=p.name;modalName.textContent=p.name;modalRole.textContent=p.role;modalBio.innerHTML=`<p>${p.bio}</p>`;modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");document.querySelector(".close").focus()}
